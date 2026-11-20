@@ -20,7 +20,7 @@ const registerUser = async (req, res) => {
     );
 
     if (existingUser.length > 0) {
-      return res.status(400).json({
+      return res.status(400).json({ 
         message: "Email sudah terdaftar",
       });
     }
