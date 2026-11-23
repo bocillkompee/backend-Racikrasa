@@ -1,13 +1,21 @@
+require("dotenv").config();
 const express = require("express");
 const db = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");  
+const productRoutes = require("./routes/productRoutes")
+const uploadRoutes = require("./routes/uploadRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+
 
 const app = express();
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/upload", uploadRoutes);
+app.use("/api/orders", orderRoutes);
 
 
 //tes apakah server berjalan

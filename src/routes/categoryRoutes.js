@@ -5,10 +5,12 @@ const {
   createCategory,
   getAllCategories,
   updateCategory,
+  deleteCategory,
 } = require("../controllers/categoryController");
 
 const { verifyToken } = require("../middleware/authMiddleware");
 const { verifyRole } = require("../middleware/roleMiddleware");
+const { verify } = require("jsonwebtoken");
 
 // Menambahkan kategori khusus Admin
 router.post(
@@ -18,8 +20,18 @@ router.post(
   createCategory
 );
 
+//menambah kategori khusus admin
+router.post(
+  "/",
+  verifyToken,
+  verifyRole("admin"),
+  createCategory
+
+);
+
 //menampilkan semua kategori 
 router.get("/", getAllCategories)
+
 
 // Mengubah kategori khusus Admin
 router.put(
@@ -28,5 +40,12 @@ router.put(
   verifyRole("admin"),
   updateCategory
 );
+
+router.delete(
+  "/:id",
+  verifyToken,
+  verifyRole("admin"),
+  deleteCategory
+)
 
 module.exports = router;
